@@ -28,11 +28,11 @@ def main(wf):
             wf.add_item('No results')
             wf.send_feedback()
         else:
-            for item in result:
+            for item in result["ngrams"]:
                 wf.add_item(
-                    title=' '.join(item['phrase']).replace(
-                        '<strong>', '').replace('</strong>', ''),
-                    subtitle=item['percent'] + ', ' + item['count_str'])
+                    title=item[0],
+                    subtitle="perc: %.4f, count: %d" % (
+                        item[1] / float(result["total"]), item[1], ))
             wf.send_feedback()
     else:
         wf.add_item('404')
